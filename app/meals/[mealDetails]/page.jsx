@@ -2,9 +2,14 @@ import React from "react";
 import style from "./meal-details.module.css";
 import Image from "next/image";
 import { getMeal } from "@/lib/meals";
+import { notFound } from "next/navigation";
 
 export default async function MealDetails({ params }) {
   const meal = await getMeal(params.mealDetails);
+
+  if(!meal){
+    notFound()
+  }
 
   let { title, slug, image, summary, instructions, creator, creator_email } =
     meal;
